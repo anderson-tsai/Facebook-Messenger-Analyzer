@@ -5,7 +5,7 @@ Features:
 	2. Shows most used word/phrase/reactions
 	3. Shows type of content shown in chat
 	4. First message ever
-	5. Talk to a simulation of a friend/group chat created group chat data and chatterbot utilizing chatterbot library and Markov chaining
+	5. Talk to a simulation of a friend/group chat through a chatterbot trained with information from a conversation
 
 Dependencies:
 	1. chatterbot
@@ -16,6 +16,7 @@ How to use:
 	Then run analyzer.py to analyze data and provide user statistics or run chatbot.py, and enter the name 
 	of a group chat or the name of a person that you have chatted with, and get an interactive chatbot for a person or group.
 
+<<<<<<< HEAD
 To the name of user or file directory, edit only settings.ini
 
 If you get an error like:
@@ -41,3 +42,5 @@ else:
 nltk.download()
 
 Choose to download all corpus
+
+To change the name of user or file directory, edit only settings.ini
