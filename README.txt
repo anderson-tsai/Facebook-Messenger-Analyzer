@@ -16,7 +16,6 @@ How to use:
 	Then run analyzer.py to analyze data and provide user statistics or run chatbot.py, and enter the name 
 	of a group chat or the name of a person that you have chatted with, and get an interactive chatbot for a person or group.
 
-<<<<<<< HEAD
 To the name of user or file directory, edit only settings.ini
 
 If you get an error like:
@@ -42,5 +41,3 @@ else:
 nltk.download()
 
 Choose to download all corpus
-
-To change the name of user or file directory, edit only settings.ini
