@@ -2,10 +2,13 @@ import os
 import json
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
+import configparser
 
-messages_dir = 'messages/inbox/'
+config = configparser.RawConfigParser()
+config.read('settings.ini')
+
+messages_dir = config.get('settings', 'messages_directory')
 group = input('Enter name of chat or person\'s name: ')
-user = 'Anderson Tsai'
 
 def get_info(group):
     '''

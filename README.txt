@@ -15,3 +15,5 @@ How to use:
 	Download message history from Facebook, and place messages folder in the same directory as the script. 
 	Then run analyzer.py to analyze data and provide user statistics or run chatbot.py, and enter the name 
 	of a group chat or the name of a person that you have chatted with, and get an interactive chatbot for a person or group.
+
+To the name of user or file directory, edit only settings.ini

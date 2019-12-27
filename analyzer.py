@@ -2,11 +2,14 @@ import os
 import json
 import collections
 from datetime import datetime
+import configparser
 
-'''
-Variables to change
-'''
-messages_dir = 'messages/inbox/'
+config = configparser.RawConfigParser()
+config.read('settings.ini')
+
+messages_dir = config.get('settings', 'messages_directory')
+user = config.get('settings', 'user')
+
 everyone_words = collections.Counter()
 user_words = collections.Counter()
 everyone_reacts = collections.Counter()
@@ -17,8 +20,6 @@ ear_time_r = float('inf')
 ear_time_s = float('inf')
 ear_sender = ''
 ear_reciever = ''
-
-user = 'Anderson Tsai'
 
 reactions = {'\u00f0\u009f\u0098\u008d': 'heart_eyes',
              '\u00e2\u009d\u00a4' : 'heart',
