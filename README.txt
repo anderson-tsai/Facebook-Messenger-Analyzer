@@ -5,7 +5,7 @@ Features:
 	2. Shows most used word/phrase/reactions
 	3. Shows type of content shown in chat
 	4. First message ever
-	5. Talk to a simulation of a friend/group chat created group chat data and chatterbot utilizing chatterbot library and Markov chaining
+	5. Talk to a simulation of a friend/group chat through a chatterbot trained with information from a conversation
 
 Dependencies:
 	1. chatterbot
