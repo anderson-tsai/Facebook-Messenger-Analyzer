@@ -20,6 +20,7 @@ ear_time_r = float('inf')
 ear_time_s = float('inf')
 ear_sender = ''
 ear_reciever = ''
+message_times = collections.Counter()
 
 reactions = {'\u00f0\u009f\u0098\u008d': 'heart_eyes',
              '\u00e2\u009d\u00a4' : 'heart',
@@ -38,16 +39,18 @@ def json_reader():
     Goes through every message in directory and calls a different analyze function on each one. Returns None.
     '''
     for filename in os.listdir(messages_dir):
-        for file_in_chat in os.listdir(os.path.join(messages_dir, filename)):
-            if file_in_chat.lower().endswith('.json'):
-                with open(os.path.join(messages_dir, os.path.join(filename, file_in_chat))) as f:
-                    data = json.load(f)
-                    for message in data['messages']:
-                        if 'content' in message.keys():
-                            count_words(message)
-                            find_first_message(message, data['participants'])
-                        if 'reactions' in message.keys():
-                            count_reactions(message)
+        if os.path.isdir(os.path.join(messages_dir, filename)):
+            for file_in_chat in os.listdir(os.path.join(messages_dir, filename)):
+                if file_in_chat.lower().endswith('.json'):
+                    with open(os.path.join(messages_dir, os.path.join(filename, file_in_chat))) as f:
+                        data = json.load(f)
+                        for message in data['messages']:
+                            if 'content' in message.keys():
+                                count_words(message)
+                                find_first_message(message, data['participants'])
+                            if 'reactions' in message.keys():
+                                count_reactions(message)
+                            find_time(message)
     
 '''
 Analyze Functions
@@ -89,6 +92,13 @@ def find_first_message(message, members):
     elif timestamp < ear_time_r and sender != user:
         ear_mes_r, ear_time_r, ear_sender = content, timestamp, sender
 
+def find_time(message):
+    '''
+    Counts the hour of each message sent by user. Returns None.
+    '''
+    if message['sender_name'] == user:
+        message_times[(datetime.fromtimestamp(message['timestamp_ms']/1000).hour)] += 1
+
 if __name__ == '__main__':
     json_reader()
     print('Most commonly used words in your chats: ')
@@ -105,7 +115,4 @@ if __name__ == '__main__':
         print(react)
     print('First message recieved: ' + ear_mes_r + ' ***', datetime.fromtimestamp(ear_time_r/1000), 'from ' + ear_sender + ' ***')
     print('First message sent: ' + ear_mes_s + ' ***', datetime.fromtimestamp(ear_time_s/1000), 'sent to ' + ear_reciever + ' ***')
-    # print(everyone_words.most_common(10))
-    # print(user_words.most_common(10))
-    # print(everyone_reacts)
-    # print(user_reacts)
+    print('You text the most often around', message_times.most_common(1)[0][0], 'and you\'ve sent', message_times.most_common(1)[0][1], 'messages.')
