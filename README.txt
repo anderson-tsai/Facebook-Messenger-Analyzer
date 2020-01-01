@@ -3,9 +3,8 @@ Facebook Messenger Analyzer
 Features:
 	1. Shows most active chat
 	2. Shows most used word/phrase/reactions
-	3. Shows type of content shown in chat
-	4. First message ever
-	5. Talk to a simulation of a friend/group chat through a chatterbot trained with information from a conversation
+	3. First message ever
+	4. Talk to a simulation of a friend/group chat through a chatbot trained with information from a conversation
 
 Dependencies:
 	1. chatterbot

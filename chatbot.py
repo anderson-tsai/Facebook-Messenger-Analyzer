@@ -36,13 +36,25 @@ def get_info(group):
             break
     return sentences
 
+def remove_starter_files():
+    '''
+    Removes trained data from previous runs so that data is new. Returns None
+    '''
+    for filename in os.listdir():
+        if filename == 'sentence_tokenizer.pickle' or filename == 'db.sqlite3-wal' or filename == 'db.sqlite3-shm' or filename == 'db.sqlite3':
+            os.remove(filename)
+
 chat_bot = ChatBot(name='PyBot', read_only=True,
                  logic_adapters=['chatterbot.logic.BestMatch'])
 training_data = get_info(group)
 trainer = ListTrainer(chat_bot)
 trainer.train(training_data)
 
-print('Type anything to the bot')
-while True:
-    prompt = input('You: ')
-    print(group + ': ', chat_bot.get_response(prompt))
+print('Type anything to the bot (Press CTRL+C to exit)')
+try:
+    while True:
+        prompt = input('You: ')
+        print(group + ': ', chat_bot.get_response(prompt))
+except KeyboardInterrupt:
+    remove_starter_files()
+    print('\nSee you later!')
