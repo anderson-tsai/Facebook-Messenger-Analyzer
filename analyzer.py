@@ -36,8 +36,6 @@ reactions = {'\u00f0\u009f\u0098\u008d': 'heart_eyes',
              '\u00f0\u009f\u0091\u008e' : 'thumb_down' 
             }
 
-
-
 def read_all():
     '''
     Goes through every message in directory and calls a different analyze function on each one. Returns None.
