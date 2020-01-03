@@ -14,8 +14,8 @@ Download files, and download Facebook messenger history. Place folder titled 'me
 
 ### Prerequisites
 
-pip install: 
-    1. chatterbot
+pip install:<br/>
+    1. chatterbot<br/>
     2. chatterbot_corpus
 
 ### Troubleshooting
