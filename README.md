@@ -2,10 +2,10 @@
 
 Analyze all your Facebook messenger messages and chat with a chatbot trained on a conversation of your choosing.
 
-Features:
-    1. Shows most active chat
-    2. Shows most used word/phrase/reactions
-    3. First message ever
+Features:<br/>
+    1. Shows most active chat<br/>
+    2. Shows most used word/phrase/reactions<br/>
+    3. First message ever<br/>
     4. Talk to a simulation of a friend/group chat through a chatbot trained with information from a conversation
 
 ## Installing
