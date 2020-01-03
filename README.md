@@ -50,7 +50,7 @@ Choose to download all corpus.
 
 ## Authors
 
-* **Anderson Tsai** - [Github Page](https://github.com/PurpleBooth)
+* **Anderson Tsai** - [Github Page](https://github.com/anderson-tsai)
 
 ## License
 
