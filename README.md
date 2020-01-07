@@ -10,7 +10,7 @@ Features:<br/>
 
 ## Installing
 
-Download files, and download Facebook messenger history. Place folder titled "messages" into same directory as python files. Open "settings.ini" and change the variable names accordingly. Run analyzer.py to analyze messages, or run chatbot.py to create chatbot of conversation.
+Download files, and download Facebook messenger history. Place folder titled "messages" into same directory as python files. Open "settings.ini" and change the variable names accordingly. Simply run gui.py for the interface, Run analyzer.py to analyze messages or run chatbot.py to create chatbot in terminal.
 
 ### Prerequisites
 

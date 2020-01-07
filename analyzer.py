@@ -36,7 +36,7 @@ reactions = {'\u00f0\u009f\u0098\u008d': 'heart_eyes',
              '\u00f0\u009f\u0091\u008e' : 'thumb_down' 
             }
 
-def read_all():
+def read_all(show_most_active=True, show_most_used=True, show_first_message=True):
     '''
     Goes through every message in directory and calls a different analyze function on each one. Returns None.
     '''
@@ -48,10 +48,13 @@ def read_all():
                         data = json.load(f)
                         for message in data['messages']:
                             if 'content' in message.keys():
-                                count_words(message)
-                                find_first_message(message, data['participants'])
+                                if show_most_active:
+                                    count_words(message)
+                                if show_first_message:
+                                    find_first_message(message, data['participants'])
                             if 'reactions' in message.keys():
-                                count_reactions(message)
+                                if show_most_used:
+                                    count_reactions(message)
                             find_time(message)
 
 def read_single(chat_name):
@@ -67,6 +70,7 @@ def read_single(chat_name):
                         for message in data['messages']:
                             if 'content' in message.keys():
                                 get_contribution(message)
+            break
 
 '''
 Analyzation Functions
@@ -132,13 +136,49 @@ def plot_counter_line(counter, title):
     plt.plot(labels, values)
     plt.show()
 
+def get_from_gui(show_most_active, show_most_used, show_first_message):
+    '''
+    Run this function from gui.py. Runs program with requested options. Returns computed results.
+    '''
+    read_all(bool(show_most_active), bool(show_most_used), bool(show_first_message))
+    output_str = ''
+    if show_most_active:
+        most_texting_hour = datetime.strptime(str(message_times.most_common(1)[0][0]), '%H').strftime('%I')
+        if message_times.most_common(1)[0][0] > 12:
+            most_texting_hour += ' PM'
+        else:
+            most_texting_hour += ' AM'
+        output_str += 'You text the most often around ' + most_texting_hour + ' and you\'ve sent ' + str(message_times.most_common(1)[0][1]) + ' messages around this hour.\n'
+        # plot_counter_line(message_times, user+'\'s Active Hours')
+
+    if show_most_used:
+        output_str += 'Most commonly used words in your chats: \n'
+        for word in everyone_words.most_common(10):
+            output_str += word[0] + ': ' + str(word[1]) + '\n'
+        output_str += 'Most commonly used words by you: \n'
+        for word in user_words.most_common(10):
+            output_str += word[0] + ': ' + str(word[1]) + '\n'
+        output_str += 'Most commonly used reacts in your chats: \n'
+        for react in everyone_reacts.most_common(8):
+            output_str += react[0] + ': ' + str(react[1]) + '\n'
+        output_str += 'Most commonly used reacts by you: \n'
+        for react in user_reacts.most_common(8):
+            output_str += react[0] + ': ' + str(react[1]) + '\n'
+
+    if show_first_message: 
+        output_str += 'First message recieved: ' + ear_mes_r + ' ***'+ str(datetime.fromtimestamp(ear_time_r/1000)) + ' from ' + ear_sender + ' ***\n' 
+        output_str += 'First message sent: ' + ear_mes_s + ' ***' + str(datetime.fromtimestamp(ear_time_s/1000)) +  ' sent to ' + ear_reciever + ' ***\n'
+
+    return output_str
+
+#Used to run from terminal
 if __name__ == '__main__':
     read_all()
-    # read_single(chat_name)
+    read_single(chat_name)
     print('Most commonly used words in your chats: ')
     for word in everyone_words.most_common(10):
         print(word)
-    print('Most commony used words by you: ')
+    print('Most commonly used words by you: ')
     for word in user_words.most_common(10):
         print(word)
     print('Most commonly used reacts in your chats: ')
@@ -154,8 +194,8 @@ if __name__ == '__main__':
         most_texting_hour += ' PM'
     else:
         most_texting_hour += ' AM'
-    print('You text the most often around', most_texting_hour, 'and you\'ve sent', message_times.most_common(1)[0][1], 'messages.')
-    # print('Ranking of most words contributed to ', chat_name, ': ')
-    # for user_and_words in contributions.most_common(len(contributions)):
-    #     print(user_and_words[0], ' - ', user_and_words[1], ' words')
+    print('You text the most often around', most_texting_hour, 'and you\'ve sent', message_times.most_common(1)[0][1], 'messages around this hour.')
+    print('Ranking of most words contributed to ', chat_name, ': ')
+    for user_and_words in contributions.most_common(len(contributions)):
+        print(user_and_words[0], ' - ', user_and_words[1], 'words')
     plot_counter_line(message_times, user+'\'s Active Hours')
