@@ -132,7 +132,7 @@ def plot_counter_line(counter, title):
     for pair in counter:
         labels.append(pair[0])
         values.append(pair[1])
-        plt.title(title)
+        plt.title(title) 
     plt.plot(labels, values)
     plt.show()
 
@@ -140,6 +140,8 @@ def get_from_gui(show_most_active, show_most_used, show_first_message):
     '''
     Run this function from gui.py. Runs program with requested options. Returns computed results.
     '''
+    if not user:
+        return 'Please enter valid username in the settings.ini file.'
     read_all(bool(show_most_active), bool(show_most_used), bool(show_first_message))
     output_str = ''
     if show_most_active:
@@ -149,7 +151,7 @@ def get_from_gui(show_most_active, show_most_used, show_first_message):
         else:
             most_texting_hour += ' AM'
         output_str += 'You text the most often around ' + most_texting_hour + ' and you\'ve sent ' + str(message_times.most_common(1)[0][1]) + ' messages around this hour.\n'
-        # plot_counter_line(message_times, user+'\'s Active Hours')
+        plot_counter_line(message_times, user+'\'s Active Hours')
 
     if show_most_used:
         output_str += 'Most commonly used words in your chats: \n'

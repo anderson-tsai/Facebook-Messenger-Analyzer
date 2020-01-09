@@ -108,7 +108,7 @@ class ChatBotGUI(tk.Tk):
 
         self.conversation['state'] = 'normal'
         self.conversation.insert(
-            tk.END, "Human: " + user_input + "\n" + self.chat_name + ": " + str(response.text) + "\n"
+            tk.END, "You: " + user_input + "\n" + self.chat_name + ": " + str(response.text) + "\n"
         )
         self.conversation['state'] = 'disabled'
 
